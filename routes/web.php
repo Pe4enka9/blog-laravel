@@ -24,6 +24,16 @@ Route::middleware(['user'])->group(function () {
         return view('index');
     })->name('index');
 
+    Route::prefix('personal')->name('personal.')->group(function () {
+        Route::get('/', function () {
+            return view('personal.index');
+        })->name('index');
+
+        Route::prefix('articles')->controller(ArticleController::class)->name('articles.')->group(function () {
+            Route::get('/', 'personalIndex')->name('index');
+        });
+    });
+
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 });
 

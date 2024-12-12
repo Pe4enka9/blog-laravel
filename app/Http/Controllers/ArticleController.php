@@ -30,4 +30,14 @@ class ArticleController extends Controller
             'success' => true,
         ]);
     }
+
+    public function personalIndex(): View
+    {
+        $articles = Article::query()
+            ->where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('personal.articles.index', ['articles' => $articles]);
+    }
 }
