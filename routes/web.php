@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
@@ -17,7 +18,7 @@ Route::middleware(['guest'])->group(function () {
     });
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['user'])->group(function () {
     Route::get('/', function () {
         return view('index');
     })->name('index');
@@ -28,5 +29,17 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['admin'])->prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
+    })->name('admin.index');
+
+    Route::prefix('categories')->controller(CategoryController::class)->name('categories.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+
+        Route::delete('/{id}', 'destroy')->name('destroy');
     });
 });
