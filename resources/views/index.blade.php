@@ -4,7 +4,10 @@
 @section('content')
 
     <div class="container mt-3">
-        <a href="{{ route('logout') }}" class="mb-3 btn btn-outline-secondary">Выйти</a>
+        <form action="{{ route('logout') }}" method="post" class="mb-3">
+            @csrf
+            <input type="submit" value="Выйти" class="btn btn-outline-secondary">
+        </form>
         <h1 class="mb-3 text-primary">Главная</h1>
     </div>
 

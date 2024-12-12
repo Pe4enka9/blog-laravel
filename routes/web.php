@@ -22,5 +22,11 @@ Route::middleware(['auth'])->group(function () {
         return view('index');
     })->name('index');
 
-    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+});
+
+Route::middleware(['admin'])->prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.index');
+    });
 });
