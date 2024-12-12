@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -41,5 +42,11 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
         Route::patch('/{id}', 'update')->name('update');
 
         Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('articles')->controller(ArticleController::class)->name('articles.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::post('/update', 'update')->name('update');
     });
 });

@@ -4,8 +4,8 @@
 @section('content')
 
     <div class="container mt-3">
-        <h1 class="mb-3 text-primary">Категории</h1>
         <a href="{{ route('admin.index') }}" class="mb-3 btn btn-outline-secondary">Назад</a>
+        <h1 class="mb-3 text-primary">Категории</h1>
         <a href="{{ route('categories.create') }}" class="mb-3 btn btn-primary">Добавить</a>
 
         <table class="table table-striped">
